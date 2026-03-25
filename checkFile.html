@@ -1,2 +1,19 @@
 <s>Test</s>
-<body onload=prompt(1)>
+<body onload="handlePageLoad()">
+<script>
+function handlePageLoad() {
+  var userInput = prompt(1);
+
+  if (typeof pendo !== "undefined") {
+    pendo.track("Page Loaded", {
+      page_title: document.title || "checkFile",
+      page_url: window.location.href
+    });
+
+    pendo.track("Prompt Interaction", {
+      prompt_responded: userInput !== null,
+      response_provided: userInput !== null && userInput.length > 0
+    });
+  }
+}
+</script>
